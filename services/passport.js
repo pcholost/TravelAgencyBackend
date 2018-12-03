@@ -1,6 +1,6 @@
 var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth20').Strategy;
-var config = require('../config/config');
+var config = require('../../config/config');
 var mongoose = require('mongoose');
 
 var User = mongoose.model('users');

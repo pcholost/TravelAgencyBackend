@@ -1,4 +1,4 @@
-var config = require('../config/config');
+var config = require('../../config/config');
 var cookieSession = require('cookie-session');
 var passport = require('passport');
 
