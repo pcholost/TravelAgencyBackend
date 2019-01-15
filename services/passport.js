@@ -1,6 +1,6 @@
 var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth20').Strategy;
-var config = require('../../config/config');
+var config = require('../config/config');
 var mongoose = require('mongoose');
 
 var User = mongoose.model('users');
@@ -29,7 +29,10 @@ passport.use(
                 }else{
                     new User({
                         username: profile.displayName,
-                        googleId : profile.id})
+                        googleId : profile.id,
+                        email : profile.emails[0].value,
+                        userType : "user"
+                    })
                         .save()
                         .then(user => done(null, user))
                 }

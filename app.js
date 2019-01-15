@@ -2,6 +2,7 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
 var logger = require('morgan');
 
 var app = express();
@@ -9,14 +10,27 @@ var app = express();
 require('./services/cookieSession')(app);
 
 require('./models/User');
+require('./models/Offer');
+require('./models/OfferRating');
+require('./models/Facilities');
+require('./models/Order');
 require('./services/passport');
 require('./services/mongoConnect');
 
-//var usersRouter = require('./routes/users');
-
-
 require('./routes/googleAuth')(app);
 var indexRouter = require('./routes/index');
+var userRouter = require('./routes/user.route');
+var offerRouter = require('./routes/offer.route');
+var offerRatingRouter = require('./routes/offerRating.route');
+var facilitiesRouter = require('./routes/facilities.route');
+var orderRouter = require('./routes/order.route');
+
+app.use(bodyParser());
+app.use('/user',userRouter);
+app.use('/offer',offerRouter);
+app.use('/offerRating', offerRatingRouter);
+app.use('/facilities', facilitiesRouter);
+app.use('/order', orderRouter);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

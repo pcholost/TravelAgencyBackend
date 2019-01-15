@@ -3,7 +3,10 @@ var {Schema} = mongoose;
 
 var userSchema = new Schema({
     username : String,
-    googleId : String
+    googleId : String,
+    email : String,
+    rated: [{type: Schema.Types.ObjectId, ref: 'OfferRating'}],
+    userType: String,
 });
 
 
